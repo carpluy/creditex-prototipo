@@ -160,7 +160,7 @@ section[data-testid="stSidebar"] .stSelectbox>div>div {{
 
 /* TABLA PARÁMETROS */
 .params-table {{ width:100%;border-collapse:collapse;font-size:15px;border-radius:14px;overflow:hidden; }}
-.params-table th {{ background:{C_PRIMARY}22;color:{C_PRIMARY};font-weight:700;padding:13px 18px;text-align:left; }}
+.params-table th {{ background:#F1F5F9;color:{TEXT_MAIN};font-weight:700;padding:13px 18px;text-align:left;font-size:14px; }}
 .params-table td {{ padding:12px 18px;border-bottom:1px solid {BORDER};color:{TEXT_MAIN}; }}
 .params-table tr:nth-child(even) td {{ background:{BG_APP}; }}
 .params-table tr:last-child td {{ border-bottom:none; }}
@@ -228,10 +228,8 @@ st.markdown(f"""
       <span class="header-gold">CONCYTEC 2026</span>
     </div>
   </div>
-  <div style="background:rgba(255,255,255,0.18);border-radius:14px;padding:10px 18px;flex-shrink:0">
-    <img src="https://www.creditex.com.pe/wp-content/uploads/2021/03/logo-creditex.png"
-         height="46"
-         onerror="this.outerHTML='<b style=color:white;font-size:20px;letter-spacing:1px>CREDITEX</b>'">
+  <div style="background:rgba(255,255,255,0.18);border-radius:14px;padding:10px 18px;flex-shrink:0;font-size:22px;font-weight:900;color:white;letter-spacing:1px">
+    🧵 CREDITEX
   </div>
 </div>""", unsafe_allow_html=True)
 
@@ -304,9 +302,8 @@ modelo,columnas,precision,importancias=entrenar_modelo(df_raw)
 # ── SIDEBAR ───────────────────────────────────────────────────────────────────
 with st.sidebar:
     st.markdown(f"""<div style="text-align:center;padding:16px 0 20px;border-bottom:1px solid {BORDER};margin-bottom:18px">
-      <div style="background:{BG_APP};border-radius:12px;padding:10px 16px;display:inline-block">
-        <img src="https://www.creditex.com.pe/wp-content/uploads/2021/03/logo-creditex.png"
-             height="42" onerror="this.outerHTML='<b style=color:{C_PRIMARY};font-size:18px>CREDITEX</b>'">
+      <div style="background:{C_PRIMARY};border-radius:12px;padding:10px 16px;display:inline-block;color:white;font-size:18px;font-weight:900;letter-spacing:1px">
+        🧵 CREDITEX
       </div>
       <div style="font-size:12px;color:{TEXT_LIGHT};margin-top:8px;font-weight:600">Sistema Inteligente de Producción</div>
     </div>""", unsafe_allow_html=True)
@@ -423,7 +420,7 @@ with tab1:
                 "threshold":{"line":{"color":TEXT_MAIN,"width":3},"thickness":0.85,"value":riesgo_pct},
             }
         ))
-        fig.update_layout(height=360, margin=dict(t=90,b=20,l=30,r=30),
+        fig.update_layout(height=380, margin=dict(t=100,b=30,l=60,r=60),
                           paper_bgcolor=BG_CARD, plot_bgcolor=BG_CARD,
                           font={"color":TEXT_MAIN})
         st.plotly_chart(fig, use_container_width=True)
