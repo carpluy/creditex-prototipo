@@ -11,7 +11,7 @@ from cloud_data import (
     fetch_latest_reading, get_summary_stats, get_filter_options
 )
 
-st.set_page_config(page_title="Sistema Inteligente - CREDITEX", page_icon="<i class="fas fa-industry"></i>", layout="wide") 
+st.set_page_config(page_title="Sistema Inteligente - CREDITEX", page_icon="🧵", layout="wide")
 
 C_PRIMARY   = "#5B21B6"
 C_SECONDARY = "#2563EB"
