@@ -29,53 +29,80 @@ st.markdown(f"""
 .stApp {{ background:{BG_APP} !important; }}
 
 section[data-testid="stSidebar"] {{
-    background:{BG_CARD} !important;
+    background:#FFFFFF !important;
     border-right:2px solid {BORDER} !important;
     min-width:220px !important; max-width:240px !important;
 }}
-section[data-testid="stSidebar"] * {{ color:{TEXT_MAIN} !important; font-size:13px !important; }}
-section[data-testid="stSidebar"] label {{ color:{TEXT_MAIN} !important; font-weight:600 !important; font-size:12px !important; }}
-section[data-testid="stSidebar"] .stSelectbox label {{ color:{TEXT_MAIN} !important; font-size:13px !important; }}
-section[data-testid="stSidebar"] p {{ color:{TEXT_MAIN} !important; font-size:13px !important; }}
-section[data-testid="stSidebar"] h3 {{ color:{C_PRIMARY} !important; font-size:14px !important; font-weight:700 !important; }}
-section[data-testid="stSidebar"] [data-testid="stSlider"] div {{ color:{TEXT_MAIN} !important; }}
-section[data-testid="stSidebar"] [data-testid="stSlider"] p {{ font-size:13px !important; font-weight:700 !important; color:{C_PRIMARY} !important; }}
-section[data-testid="stSidebar"] .stButton>button {{
-    background:linear-gradient(135deg,{C_PRIMARY},{C_SECONDARY}) !important;
-    color:white !important; border:none !important; border-radius:10px !important;
-    font-weight:700 !important; font-size:14px !important;
-    box-shadow:0 3px 10px rgba(91,33,182,.3) !important;
+/* FORZAR TODOS LOS TEXTOS DEL SIDEBAR EN OSCURO */
+section[data-testid="stSidebar"],
+section[data-testid="stSidebar"] *,
+section[data-testid="stSidebar"] p,
+section[data-testid="stSidebar"] span,
+section[data-testid="stSidebar"] label,
+section[data-testid="stSidebar"] div,
+section[data-testid="stSidebar"] small,
+section[data-testid="stSidebar"] [class*="st-"],
+section[data-testid="stSidebar"] [data-testid*="st"] {{
+    color: #1E1B4B !important;
+    font-size: 13px !important;
+}}
+section[data-testid="stSidebar"] h3 {{
+    color: {C_PRIMARY} !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+}}
+section[data-testid="stSidebar"] .stButton > button {{
+    background: linear-gradient(135deg, {C_PRIMARY}, {C_SECONDARY}) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 10px !important;
+    font-weight: 700 !important;
+    font-size: 13px !important;
+    box-shadow: 0 3px 10px rgba(91,33,182,.3) !important;
+}}
+section[data-testid="stSidebar"] .stButton > button * {{
+    color: white !important;
 }}
 section[data-testid="stSidebar"] [data-testid="stExpander"] {{
-    background:{BG_APP} !important;
-    border:1.5px solid {BORDER} !important;
-    border-radius:12px !important;
+    background: {BG_APP} !important;
+    border: 1.5px solid {BORDER} !important;
+    border-radius: 12px !important;
 }}
-section[data-testid="stSidebar"] [data-testid="stExpander"] summary {{
-    color:{TEXT_MAIN} !important; font-weight:700 !important; font-size:14px !important;
+section[data-testid="stSidebar"] [data-testid="stExpander"] summary,
+section[data-testid="stSidebar"] [data-testid="stExpander"] summary * {{
+    color: {TEXT_MAIN} !important;
+    font-weight: 700 !important;
+    font-size: 13px !important;
 }}
+section[data-testid="stSidebar"] input,
 section[data-testid="stSidebar"] [data-testid="stNumberInput"] input {{
-    background:white !important; color:{TEXT_MAIN} !important;
-    border:1.5px solid {BORDER} !important; border-radius:8px !important;
+    background: white !important;
+    color: {TEXT_MAIN} !important;
+    border: 1.5px solid {BORDER} !important;
+    border-radius: 8px !important;
 }}
-section[data-testid="stSidebar"] [data-testid="stSelectbox"]>div>div {{
-    background:white !important; color:{TEXT_MAIN} !important;
-    border:1.5px solid {BORDER} !important; border-radius:8px !important;
+section[data-testid="stSidebar"] [data-testid="stSelectbox"] > div > div {{
+    background: white !important;
+    color: {TEXT_MAIN} !important;
+    border: 1.5px solid {BORDER} !important;
+    border-radius: 8px !important;
 }}
 .sidebar-logo {{
-    background:linear-gradient(135deg,{C_PRIMARY},{C_SECONDARY});
-    padding:16px; border-radius:16px; text-align:center;
-    font-size:20px; font-weight:900; color:white !important; letter-spacing:1px;
-    box-shadow:0 6px 20px rgba(91,33,182,.3); margin-bottom:16px;
+    background: linear-gradient(135deg, {C_PRIMARY}, {C_SECONDARY});
+    padding: 16px; border-radius: 16px; text-align: center;
+    font-size: 20px; font-weight: 900; letter-spacing: 1px;
+    box-shadow: 0 6px 20px rgba(91,33,182,.3); margin-bottom: 16px;
+    color: white !important;
 }}
+.sidebar-logo * {{ color: white !important; }}
 .sidebar-stat {{
-    display:flex; align-items:center; gap:10px;
-    padding:10px 14px; background:{BG_APP};
-    border-radius:10px; margin:6px 0; border:1.5px solid {BORDER};
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 14px; background: {BG_APP};
+    border-radius: 10px; margin: 6px 0; border: 1.5px solid {BORDER};
 }}
-.sidebar-stat-icon {{ font-size:18px; }}
-.sidebar-stat-text {{ font-size:12px; color:{TEXT_LIGHT} !important; }}
-.sidebar-stat-val {{ font-size:14px; font-weight:700; color:{TEXT_MAIN} !important; }}
+.sidebar-stat-icon {{ font-size: 18px; }}
+.sidebar-stat-text {{ font-size: 12px; color: {TEXT_LIGHT} !important; font-weight: 500; }}
+.sidebar-stat-val  {{ font-size: 14px; font-weight: 700; color: {TEXT_MAIN} !important; }}
 
 .main-header {{
     background:linear-gradient(135deg,{C_PRIMARY} 0%,#7C3AED 40%,{C_SECONDARY} 100%);
