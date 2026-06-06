@@ -89,10 +89,9 @@ section[data-testid="stSidebar"] [data-testid="stSelectbox"] > div > div {{
 }}
 .sidebar-logo {{
     background: linear-gradient(135deg, {C_PRIMARY}, {C_SECONDARY});
-    padding: 16px; border-radius: 16px; text-align: center;
-    font-size: 20px; font-weight: 900; letter-spacing: 1px;
-    box-shadow: 0 6px 20px rgba(91,33,182,.3); margin-bottom: 16px;
-    color: white !important;
+    padding: 20px 16px; border-radius: 16px; text-align: center;
+    box-shadow: 0 8px 24px rgba(91,33,182,.4); margin-bottom: 18px;
+    border: 2px solid rgba(255,255,255,.2);
 }}
 .sidebar-logo * {{ color: white !important; }}
 .sidebar-stat {{
@@ -320,7 +319,10 @@ modelo,columnas,precision,importancias=entrenar_modelo(df_raw)
 # ── SIDEBAR ───────────────────────────────────────────────────────────────────
 with st.sidebar:
     # LOGO
-    st.markdown(f'<div class="sidebar-logo">🧵 CREDITEX<br><span style="font-size:11px;font-weight:500;opacity:.85">Sistema Inteligente · Producción</span></div>', unsafe_allow_html=True)
+    st.markdown(f"""<div class="sidebar-logo">
+      <div style="font-size:22px;font-weight:900;color:white;letter-spacing:2px;text-shadow:0 2px 8px rgba(0,0,0,.3)">🧵 CREDITEX</div>
+      <div style="font-size:11px;font-weight:600;color:rgba(255,255,255,.9);margin-top:4px">Sistema Inteligente · Producción</div>
+    </div>""", unsafe_allow_html=True)
 
     # CONTROLES PRINCIPALES
     telar_sel = st.selectbox("🏭 Telar", opts["telares"][1:])
