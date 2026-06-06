@@ -31,16 +31,36 @@ st.markdown(f"""
 section[data-testid="stSidebar"] {{
     background:{BG_CARD} !important;
     border-right:2px solid {BORDER} !important;
-    min-width:190px !important; max-width:210px !important;
+    min-width:260px !important; max-width:260px !important;
 }}
-section[data-testid="stSidebar"] * {{ color:#334155 !important; font-size:13px !important; }}
-section[data-testid="stSidebar"] h3 {{ color:{C_PRIMARY} !important; font-size:14px !important; font-weight:700 !important; }}
+section[data-testid="stSidebar"] * {{ color:#334155 !important; font-size:14px !important; }}
+section[data-testid="stSidebar"] h3 {{ color:{C_PRIMARY} !important; font-size:15px !important; font-weight:700 !important; }}
 section[data-testid="stSidebar"] .stButton>button {{
     background:linear-gradient(135deg,{C_PRIMARY},{C_SECONDARY}) !important;
     color:white !important; border:none !important; border-radius:10px !important;
-    font-weight:700 !important; font-size:13px !important;
+    font-weight:700 !important; font-size:14px !important;
     box-shadow:0 3px 10px rgba(91,33,182,.3) !important;
 }}
+section[data-testid="stSidebar"] [data-testid="stExpander"] {{
+    background:{BG_APP} !important;
+    border:1px solid {BORDER} !important;
+    border-radius:12px !important;
+}}
+.sidebar-logo {{
+    background:linear-gradient(135deg,{C_PRIMARY},{C_SECONDARY});
+    padding:20px; border-radius:18px; text-align:center;
+    font-size:24px; font-weight:900; color:white; letter-spacing:1px;
+    box-shadow:0 6px 20px rgba(91,33,182,.3); margin-bottom:20px;
+}}
+.sidebar-stat {{
+    display:flex; align-items:center; gap:10px;
+    padding:10px 14px; background:{BG_APP};
+    border-radius:10px; margin:6px 0;
+    border:1px solid {BORDER};
+}}
+.sidebar-stat-icon {{ font-size:18px; }}
+.sidebar-stat-text {{ font-size:13px; color:{TEXT_LIGHT}; }}
+.sidebar-stat-val {{ font-size:13px; font-weight:700; color:{TEXT_MAIN}; }}
 
 .main-header {{
     background:linear-gradient(135deg,{C_PRIMARY} 0%,#7C3AED 40%,{C_SECONDARY} 100%);
@@ -251,35 +271,64 @@ modelo,columnas,precision,importancias=entrenar_modelo(df_raw)
 
 # ── SIDEBAR ───────────────────────────────────────────────────────────────────
 with st.sidebar:
-    st.markdown(f"""<div style="text-align:center;padding:14px 0 16px;border-bottom:1.5px solid {BORDER};margin-bottom:16px">
-      <div style="background:linear-gradient(135deg,{C_PRIMARY},{C_SECONDARY});border-radius:12px;padding:9px 16px;display:inline-block;color:white;font-size:16px;font-weight:900">🧵 CREDITEX</div>
-      <div style="font-size:11px;color:{TEXT_LIGHT};margin-top:7px;font-weight:600">Sistema Inteligente · Producción</div>
-    </div>""", unsafe_allow_html=True)
+    # LOGO
+    st.markdown(f'<div class="sidebar-logo">🧵 CREDITEX<br><span style="font-size:13px;font-weight:500;opacity:.85">Sistema Inteligente de Producción</span></div>', unsafe_allow_html=True)
 
-    st.markdown("### ⚙️ Parámetros")
-    telar_sel=st.selectbox("🏭 Telar", opts["telares"][1:])
-    if st.button("🔄 Leer último registro", use_container_width=True):
+    # CONTROLES PRINCIPALES
+    telar_sel = st.selectbox("🏭 Telar", opts["telares"][1:])
+    turno     = st.selectbox("👷 Turno", ["A","B","C"])
+
+    if st.button("🔄 Actualizar datos", use_container_width=True):
         with st.spinner(f"Consultando {telar_sel}..."):
-            lec=fetch_latest_reading(telar_sel)
+            lec = fetch_latest_reading(telar_sel)
         if lec:
-            st.session_state[f"lec_{telar_sel}"]=lec
-            st.success(f"✅ {lec['timestamp']}")
+            st.session_state[f"lec_{telar_sel}"] = lec
+            st.success(f"✅ Sync: {lec['timestamp']}")
 
-    lec=st.session_state.get(f"lec_{telar_sel}")
-    temperatura  =st.slider("🌡 Temperatura (°C)", 15.0,40.0, float(lec["temperatura"])  if lec else 25.0,0.1)
-    humedad      =st.slider("💧 Humedad (%)",      40.0,95.0, float(lec["humedad"])       if lec else 65.0,0.5)
-    rpm          =st.slider("⚙️ RPM Telar",        200,900,   int(lec["rpm_telar"])        if lec else 500,10)
-    eficiencia   =st.slider("📊 Eficiencia (%)",   60.0,100.0,float(lec["eficiencia"])    if lec else 85.0,0.5)
-    tension_urd  =st.slider("🔗 Tensión urdimbre", 15.0,50.0,30.0,0.5)
-    roturas_urd  =st.slider("🧵 Roturas urdimbre", 0,20,3)
-    roturas_tram =st.slider("🧵 Roturas trama",    0,20,3)
-    metros_def   =st.slider("📏 Metros defectuosos",0,250,50)
-    t_parada     =st.slider("⏸ Parada (min)",      0,240,30)
-    t_reparac    =st.slider("🔧 Reparación (min)",  0,250,60)
-    dias_mant    =st.slider("🛠 Días mantenimiento",0,120,30)
-    turno        =st.selectbox("👷 Turno",["A","B","C"])
-    st.markdown(f"<hr style='border-color:{BORDER}'>", unsafe_allow_html=True)
-    st.markdown(f"<div style='font-size:12px;color:{TEXT_LIGHT}'>☁️ <b style='color:{TEXT_MAIN}'>{CLOUD_CONFIG['database']}</b><br>📊 {len(df_raw):,} registros<br>🤖 Precisión: <b style='color:{C_PRIMARY}'>{precision*100:.1f}%</b></div>", unsafe_allow_html=True)
+    lec = st.session_state.get(f"lec_{telar_sel}")
+
+    st.markdown(f"<hr style='border-color:{BORDER};margin:16px 0'>", unsafe_allow_html=True)
+
+    # GRUPO 1: OPERACIÓN
+    with st.expander("🌡 Operación", expanded=True):
+        temperatura = st.slider("Temperatura (°C)", 15.0,40.0, float(lec["temperatura"]) if lec else 25.0,0.1)
+        humedad     = st.slider("Humedad (%)",      40.0,95.0, float(lec["humedad"])      if lec else 65.0,0.5)
+        rpm         = st.slider("RPM Telar",        200,900,   int(lec["rpm_telar"])       if lec else 500,10)
+        eficiencia  = st.slider("Eficiencia (%)",   60.0,100.0,float(lec["eficiencia"])   if lec else 85.0,0.5)
+
+    # GRUPO 2: CALIDAD
+    with st.expander("🧵 Calidad", expanded=False):
+        tension_urd  = st.slider("Tensión urdimbre", 15.0,50.0,30.0,0.5)
+        roturas_urd  = st.number_input("Roturas urdimbre", 0,20,3)
+        roturas_tram = st.number_input("Roturas trama",    0,20,3)
+        metros_def   = st.number_input("Metros defectuosos",0,250,50)
+
+    # GRUPO 3: MANTENIMIENTO
+    with st.expander("🔧 Mantenimiento", expanded=False):
+        t_parada  = st.number_input("Tiempo parada (min)",     0,240,30)
+        t_reparac = st.number_input("Tiempo reparación (min)", 0,250,60)
+        dias_mant = st.slider("Días desde mantenimiento",      0,120,30)
+
+    st.markdown(f"<hr style='border-color:{BORDER};margin:16px 0'>", unsafe_allow_html=True)
+
+    # STATS
+    st.markdown(f"""
+    <div class="sidebar-stat">
+      <span class="sidebar-stat-icon">☁️</span>
+      <div><div class="sidebar-stat-text">Base de datos</div>
+      <div class="sidebar-stat-val">{CLOUD_CONFIG['database']}</div></div>
+    </div>
+    <div class="sidebar-stat">
+      <span class="sidebar-stat-icon">📊</span>
+      <div><div class="sidebar-stat-text">Registros cargados</div>
+      <div class="sidebar-stat-val">{len(df_raw):,}</div></div>
+    </div>
+    <div class="sidebar-stat">
+      <span class="sidebar-stat-icon">🤖</span>
+      <div><div class="sidebar-stat-text">Precisión del modelo</div>
+      <div class="sidebar-stat-val" style="color:{C_PRIMARY}">{precision*100:.1f}%</div></div>
+    </div>
+    """, unsafe_allow_html=True)
 
 # ── PREDICCIÓN ────────────────────────────────────────────────────────────────
 ent={"Temperatura":temperatura,"Humedad":humedad,"RPM_Telar":rpm,"Eficiencia_Telar":eficiencia,
