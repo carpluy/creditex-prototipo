@@ -62,8 +62,8 @@ section[data-testid="stSidebar"] .stSelectbox>div>div {{
     background: rgba(255,255,255,0.2); border-radius: 16px;
     padding: 16px; font-size: 30px; flex-shrink: 0;
 }}
-.header-title {{ font-size:26px; font-weight:800; color:white; margin:0; }}
-.header-sub   {{ font-size:13px; color:rgba(255,255,255,0.85); margin:5px 0 0; }}
+.header-title {{ font-size:28px; font-weight:800; color:white; margin:0; }}
+.header-sub   {{ font-size:14px; color:rgba(255,255,255,0.9); margin:6px 0 0; }}
 .header-gold  {{ color:#FFD700; font-weight:700; }}
 
 /* TARJETAS KPI */
@@ -71,24 +71,24 @@ section[data-testid="stSidebar"] .stSelectbox>div>div {{
     background: {BG_CARD};
     border: 1px solid {BORDER};
     border-radius: 20px;
-    padding: 22px 24px;
-    box-shadow: 0 4px 15px rgba(0,0,0,.05);
-    display: flex; align-items: center; gap: 18px;
-    transition: .3s; cursor:default;
+    padding: 28px 26px;
+    box-shadow: 0 4px 15px rgba(0,0,0,.07);
+    display: flex; align-items: center; gap: 20px;
+    transition: .3s; cursor:default; min-height:110px;
 }}
-.kpi-card:hover {{ transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,.10); }}
+.kpi-card:hover {{ transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0,0,0,.12); }}
 .kpi-icon {{
-    width: 60px; height: 60px; border-radius: 16px;
+    width: 68px; height: 68px; border-radius: 18px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 28px; flex-shrink: 0;
+    font-size: 32px; flex-shrink: 0;
 }}
 .ic-red    {{ background: linear-gradient(135deg,#FF6B6B,{C_DANGER}); }}
 .ic-blue   {{ background: linear-gradient(135deg,#74b9ff,{C_SECONDARY}); }}
 .ic-purple {{ background: linear-gradient(135deg,#a29bfe,{C_PRIMARY}); }}
 .ic-green  {{ background: linear-gradient(135deg,#55efc4,{C_SUCCESS}); }}
-.kpi-label {{ font-size:13px; color:{TEXT_LIGHT}; font-weight:500; margin:0; }}
-.kpi-value {{ font-size:36px; font-weight:800; color:{TEXT_MAIN}; margin:4px 0 0; line-height:1; }}
-.kpi-badge {{ display:inline-block; font-size:12px; font-weight:700; padding:4px 12px; border-radius:20px; margin-top:7px; }}
+.kpi-label {{ font-size:15px; color:{TEXT_LIGHT}; font-weight:600; margin:0; }}
+.kpi-value {{ font-size:42px; font-weight:800; color:{TEXT_MAIN}; margin:6px 0 0; line-height:1; }}
+.kpi-badge {{ display:inline-block; font-size:14px; font-weight:700; padding:5px 14px; border-radius:20px; margin-top:9px; }}
 .bg-green  {{ background:#D1FAE5; color:#065F46; }}
 .bg-red    {{ background:#FEE2E2; color:#991B1B; }}
 .bg-yellow {{ background:#FEF9C3; color:#92400E; }}
@@ -119,9 +119,9 @@ section[data-testid="stSidebar"] .stSelectbox>div>div {{
     background: transparent !important;
     color: {TEXT_LIGHT} !important;
     border-radius: 12px !important;
-    font-size: 14px !important;
+    font-size: 15px !important;
     font-weight: 600 !important;
-    padding: 10px 22px !important;
+    padding: 12px 24px !important;
     border: none !important;
 }}
 [aria-selected="true"] {{
@@ -140,10 +140,10 @@ section[data-testid="stSidebar"] .stSelectbox>div>div {{
 [data-testid="stExpander"] summary {{ color:{C_PRIMARY} !important; font-weight:700 !important; font-size:15px !important; }}
 
 /* ALERTAS */
-.alert-danger  {{ background:#FFF5F5;border-left:5px solid {C_DANGER};padding:16px 20px;border-radius:14px;color:#991B1B;font-size:15px; }}
-.alert-success {{ background:#F0FFF4;border-left:5px solid {C_SUCCESS};padding:16px 20px;border-radius:14px;color:#065F46;font-size:15px; }}
-.alert-warning {{ background:#FFFBEB;border-left:5px solid {C_WARNING};padding:16px 20px;border-radius:14px;color:#92400E;font-size:15px; }}
-.cloud-badge   {{ background:#F0FFF4;border:1px solid {C_SUCCESS};border-radius:12px;padding:12px 18px;font-size:14px;color:#065F46; }}
+.alert-danger  {{ background:#FFF5F5;border-left:5px solid {C_DANGER};padding:18px 22px;border-radius:14px;color:#991B1B;font-size:16px; }}
+.alert-success {{ background:#F0FFF4;border-left:5px solid {C_SUCCESS};padding:18px 22px;border-radius:14px;color:#065F46;font-size:16px; }}
+.alert-warning {{ background:#FFFBEB;border-left:5px solid {C_WARNING};padding:18px 22px;border-radius:14px;color:#92400E;font-size:16px; }}
+.cloud-badge   {{ background:#F0FFF4;border:1px solid {C_SUCCESS};border-radius:12px;padding:14px 20px;font-size:15px;color:#065F46; }}
 
 /* RECOMENDACIONES */
 .rec-box {{
@@ -159,9 +159,9 @@ section[data-testid="stSidebar"] .stSelectbox>div>div {{
 .tag-low  {{ background:#D1FAE5;color:#065F46;padding:4px 14px;border-radius:20px;font-size:13px;font-weight:700; }}
 
 /* TABLA PARÁMETROS */
-.params-table {{ width:100%;border-collapse:collapse;font-size:15px;border-radius:14px;overflow:hidden; }}
-.params-table th {{ background:#F1F5F9;color:{TEXT_MAIN};font-weight:700;padding:13px 18px;text-align:left;font-size:14px; }}
-.params-table td {{ padding:12px 18px;border-bottom:1px solid {BORDER};color:{TEXT_MAIN}; }}
+.params-table {{ width:100%;border-collapse:collapse;font-size:16px;border-radius:14px;overflow:hidden; }}
+.params-table th {{ background:#F1F5F9;color:{TEXT_MAIN};font-weight:700;padding:14px 20px;text-align:left;font-size:15px; }}
+.params-table td {{ padding:14px 20px;border-bottom:1px solid {BORDER};color:{TEXT_MAIN};font-size:15px; }}
 .params-table tr:nth-child(even) td {{ background:{BG_APP}; }}
 .params-table tr:last-child td {{ border-bottom:none; }}
 
@@ -202,11 +202,11 @@ section[data-testid="stSidebar"] .stSelectbox>div>div {{
 
 /* TEXTO */
 h1,h2,h3,h4 {{ color:{TEXT_MAIN} !important; }}
-.section-title {{ font-size:18px;font-weight:700;color:{TEXT_MAIN};margin:18px 0 12px; }}
+.section-title {{ font-size:20px;font-weight:700;color:{TEXT_MAIN};margin:20px 0 14px; }}
 p,span {{ color:{TEXT_LIGHT}; }}
-.stMarkdown p {{ color:{TEXT_MAIN};font-size:15px; }}
-code {{ background:{C_PRIMARY}18 !important;color:{C_PRIMARY} !important;border-radius:6px !important; }}
-.stCaption {{ color:{TEXT_LIGHT} !important;font-size:13px !important; }}
+.stMarkdown p {{ color:{TEXT_MAIN};font-size:16px; }}
+code {{ background:{C_PRIMARY}18 !important;color:{C_PRIMARY} !important;border-radius:6px !important;font-size:14px !important; }}
+.stCaption {{ color:{TEXT_LIGHT} !important;font-size:14px !important; }}
 
 /* SCROLLBAR */
 ::-webkit-scrollbar {{ width:6px; }}
@@ -405,7 +405,7 @@ with tab1:
                    "increasing":{"color":C_DANGER},"decreasing":{"color":C_SUCCESS}},
             title={"text":f"<b>Riesgo de Defecto</b><br><span style='font-size:16px;color:{color_g}'>{emoji} Nivel {nivel}</span>",
                    "font":{"color":TEXT_MAIN,"size":17}},
-            number={"suffix":"%","font":{"size":72,"color":TEXT_MAIN}},
+            number={"suffix":"%","font":{"size":80,"color":TEXT_MAIN}},
             gauge={
                 "axis":{"range":[0,100],"tickwidth":1,"tickcolor":TEXT_LIGHT,
                         "tickfont":{"color":TEXT_LIGHT,"size":13}},
@@ -420,7 +420,7 @@ with tab1:
                 "threshold":{"line":{"color":TEXT_MAIN,"width":3},"thickness":0.85,"value":riesgo_pct},
             }
         ))
-        fig.update_layout(height=380, margin=dict(t=100,b=30,l=60,r=60),
+        fig.update_layout(height=420, margin=dict(t=110,b=40,l=80,r=80),
                           paper_bgcolor=BG_CARD, plot_bgcolor=BG_CARD,
                           font={"color":TEXT_MAIN})
         st.plotly_chart(fig, use_container_width=True)
