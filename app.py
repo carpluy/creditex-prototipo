@@ -18,7 +18,7 @@ C_SECONDARY = "#2563EB"
 C_SUCCESS   = "#059669"
 C_WARNING   = "#D97706"
 C_DANGER    = "#DC2626"
-BG_APP      = "#EEF2FF"
+BG_APP      = "#F8FAFC"
 BG_CARD     = "#FFFFFF"
 TEXT_MAIN   = "#1E1B4B"
 TEXT_LIGHT  = "#6B7280"
@@ -44,25 +44,37 @@ section[data-testid="stSidebar"] .stButton>button {{
 
 .main-header {{
     background:linear-gradient(135deg,{C_PRIMARY} 0%,#7C3AED 40%,{C_SECONDARY} 100%);
-    border:none; border-radius:20px; padding:32px 40px; margin-bottom:20px;
-    box-shadow:0 12px 32px rgba(91,33,182,.28);
+    border:none; border-radius:22px; padding:36px 44px; margin-bottom:22px;
+    box-shadow:0 14px 40px rgba(91,33,182,.32);
     display:flex; align-items:center; gap:24px;
+    position:relative; overflow:hidden;
 }}
-.header-icon {{ background:rgba(255,255,255,.2); border-radius:18px; padding:16px; font-size:32px; flex-shrink:0; }}
-.header-title {{ font-size:32px; font-weight:900; color:white; margin:0; letter-spacing:-.3px; }}
-.header-sub   {{ font-size:14px; color:rgba(255,255,255,.88); margin:6px 0 0; }}
+.main-header::after {{
+    content:""; position:absolute; top:-100px; right:-100px;
+    width:320px; height:320px; border-radius:50%;
+    background:rgba(255,255,255,.08); pointer-events:none;
+}}
+.main-header::before {{
+    content:""; position:absolute; bottom:-80px; left:30%;
+    width:200px; height:200px; border-radius:50%;
+    background:rgba(255,255,255,.05); pointer-events:none;
+}}
+.header-icon {{ background:rgba(255,255,255,.2); border-radius:18px; padding:18px; font-size:34px; flex-shrink:0; z-index:1; }}
+.header-title {{ font-size:34px; font-weight:900; color:white; margin:0; letter-spacing:-.5px; z-index:1; }}
+.header-sub   {{ font-size:14px; color:rgba(255,255,255,.88); margin:7px 0 0; z-index:1; }}
 .header-gold  {{ color:#FDE68A; font-weight:800; }}
-.header-badge {{ background:rgba(255,255,255,.2); border-radius:12px; padding:10px 20px;
-                 font-size:20px; font-weight:900; color:white; flex-shrink:0; letter-spacing:1px; }}
+.header-badge {{ background:rgba(255,255,255,.2); border-radius:14px; padding:12px 22px;
+                 font-size:20px; font-weight:900; color:white; flex-shrink:0; letter-spacing:1px; z-index:1; }}
 
 /* KPI CARDS */
 .kpi-card {{
-    background:{BG_CARD}; border:1.5px solid {BORDER}; border-radius:22px;
-    padding:28px 24px; box-shadow:0 6px 20px rgba(91,33,182,.08);
+    background:linear-gradient(135deg,#FFFFFF 0%,#F8FAFF 100%);
+    border:1.5px solid {BORDER}; border-radius:22px;
+    padding:28px 24px; box-shadow:0 6px 20px rgba(91,33,182,.09);
     display:flex; align-items:center; gap:20px;
     transition:.25s; cursor:default; min-height:130px;
 }}
-.kpi-card:hover {{ transform:translateY(-5px); box-shadow:0 14px 32px rgba(91,33,182,.16); }}
+.kpi-card:hover {{ transform:translateY(-5px); box-shadow:0 16px 36px rgba(91,33,182,.18); }}
 .kpi-icon {{ width:70px; height:70px; border-radius:20px; display:flex; align-items:center;
              justify-content:center; font-size:32px; flex-shrink:0; }}
 .ic-red    {{ background:linear-gradient(135deg,#FF6B6B,{C_DANGER}); }}
@@ -70,7 +82,7 @@ section[data-testid="stSidebar"] .stButton>button {{
 .ic-purple {{ background:linear-gradient(135deg,#A78BFA,{C_PRIMARY}); }}
 .ic-green  {{ background:linear-gradient(135deg,#34D399,{C_SUCCESS}); }}
 .kpi-label {{ font-size:14px; color:{TEXT_LIGHT}; font-weight:600; margin:0; }}
-.kpi-value {{ font-size:52px; font-weight:900; color:{TEXT_MAIN}; margin:4px 0 0; line-height:1; }}
+.kpi-value {{ font-size:64px; font-weight:900; color:{TEXT_MAIN}; margin:4px 0 0; line-height:1; }}
 .kpi-badge {{ display:inline-block; font-size:13px; font-weight:700; padding:5px 14px; border-radius:20px; margin-top:8px; }}
 .bg-green  {{ background:#D1FAE5; color:#065F46; }}
 .bg-red    {{ background:#FEE2E2; color:#991B1B; }}
@@ -79,8 +91,9 @@ section[data-testid="stSidebar"] .stButton>button {{
 /* PARAM MINI CARDS */
 .param-grid {{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px; }}
 .param-card {{
-    background:{BG_APP}; border:1.5px solid {BORDER}; border-radius:14px;
+    background:white; border:1.5px solid {BORDER}; border-radius:14px;
     padding:12px 16px; display:flex; flex-direction:column;
+    box-shadow:0 4px 12px rgba(37,99,235,.08);
 }}
 .param-card-label {{ font-size:12px; color:{TEXT_LIGHT}; font-weight:600; margin:0; }}
 .param-card-value {{ font-size:22px; font-weight:800; color:{TEXT_MAIN}; margin:2px 0 0; }}
@@ -335,25 +348,17 @@ with tab1:
         resto=100-riesgo_pct
         fig=go.Figure(go.Pie(
             values=[riesgo_pct, resto],
-            hole=0.72,
+            hole=0.65,
             marker_colors=[ring_col, "#E0E7FF"],
-            textinfo="none",
-            hoverinfo="skip",
-            sort=False,
+            textinfo="none", hoverinfo="skip", sort=False,
         ))
-        fig.add_annotation(
-            text=f"<b>{riesgo_pct:.1f}%</b>",
-            x=0.5, y=0.55, font=dict(size=42, color=ring_col), showarrow=False
-        )
-        fig.add_annotation(
-            text=f"{emoji} {nivel}",
-            x=0.5, y=0.38, font=dict(size=18, color=TEXT_LIGHT), showarrow=False
-        )
-        fig.update_layout(
-            height=280, showlegend=False,
+        fig.add_annotation(text=f"<b>{riesgo_pct:.1f}%</b>",
+            x=0.5, y=0.57, font=dict(size=48, color=ring_col), showarrow=False)
+        fig.add_annotation(text=f"{emoji} {nivel}",
+            x=0.5, y=0.40, font=dict(size=20, color=TEXT_LIGHT), showarrow=False)
+        fig.update_layout(height=360, showlegend=False,
             margin=dict(t=10,b=10,l=10,r=10),
-            paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)"
-        )
+            paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)")
         st.plotly_chart(fig, use_container_width=True)
         st.markdown('</div>', unsafe_allow_html=True)
 
@@ -378,13 +383,15 @@ with tab1:
           <div class="param-card"><span class="param-card-label">⏸ Parada</span><span class="param-card-value">{t_parada}m</span></div>
         </div>""", unsafe_allow_html=True)
 
-    # GRÁFICO INFERIOR EN CARD
+    # GRÁFICO INFERIOR A ANCHO COMPLETO
     st.markdown(f"""<div class="chart-card">
       <div class="chart-title">📈 Relación RPM vs Nivel de Riesgo — datos reales CREDITEX</div>""", unsafe_allow_html=True)
     fig2=px.box(df_raw,x="Nivel_Riesgo",y="RPM_Telar",color="Nivel_Riesgo",
                 color_discrete_map={"Alto":C_DANGER,"Medio":C_WARNING,"Bajo":C_SUCCESS},
-                category_orders={"Nivel_Riesgo":["Bajo","Medio","Alto"]})
-    fig2.update_layout(height=280,showlegend=False,**PLT)
+                category_orders={"Nivel_Riesgo":["Bajo","Medio","Alto"]},
+                points="outliers")
+    fig2.update_traces(marker_size=8, line_width=3)
+    fig2.update_layout(height=380,showlegend=False,**PLT)
     st.plotly_chart(fig2,use_container_width=True)
     st.markdown('</div>', unsafe_allow_html=True)
 
