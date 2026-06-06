@@ -33,8 +33,12 @@ section[data-testid="stSidebar"] {{
     border-right:2px solid {BORDER} !important;
     min-width:260px !important; max-width:260px !important;
 }}
-section[data-testid="stSidebar"] * {{ color:#334155 !important; font-size:14px !important; }}
+section[data-testid="stSidebar"] * {{ color:{TEXT_MAIN} !important; font-size:14px !important; }}
+section[data-testid="stSidebar"] label {{ color:{TEXT_MAIN} !important; font-weight:600 !important; }}
+section[data-testid="stSidebar"] .stSelectbox label {{ color:{TEXT_MAIN} !important; }}
+section[data-testid="stSidebar"] p {{ color:{TEXT_MAIN} !important; }}
 section[data-testid="stSidebar"] h3 {{ color:{C_PRIMARY} !important; font-size:15px !important; font-weight:700 !important; }}
+section[data-testid="stSidebar"] [data-testid="stSlider"] div {{ color:{TEXT_MAIN} !important; }}
 section[data-testid="stSidebar"] .stButton>button {{
     background:linear-gradient(135deg,{C_PRIMARY},{C_SECONDARY}) !important;
     color:white !important; border:none !important; border-radius:10px !important;
@@ -43,24 +47,34 @@ section[data-testid="stSidebar"] .stButton>button {{
 }}
 section[data-testid="stSidebar"] [data-testid="stExpander"] {{
     background:{BG_APP} !important;
-    border:1px solid {BORDER} !important;
+    border:1.5px solid {BORDER} !important;
     border-radius:12px !important;
+}}
+section[data-testid="stSidebar"] [data-testid="stExpander"] summary {{
+    color:{TEXT_MAIN} !important; font-weight:700 !important; font-size:14px !important;
+}}
+section[data-testid="stSidebar"] [data-testid="stNumberInput"] input {{
+    background:white !important; color:{TEXT_MAIN} !important;
+    border:1.5px solid {BORDER} !important; border-radius:8px !important;
+}}
+section[data-testid="stSidebar"] [data-testid="stSelectbox"]>div>div {{
+    background:white !important; color:{TEXT_MAIN} !important;
+    border:1.5px solid {BORDER} !important; border-radius:8px !important;
 }}
 .sidebar-logo {{
     background:linear-gradient(135deg,{C_PRIMARY},{C_SECONDARY});
     padding:20px; border-radius:18px; text-align:center;
-    font-size:24px; font-weight:900; color:white; letter-spacing:1px;
+    font-size:24px; font-weight:900; color:white !important; letter-spacing:1px;
     box-shadow:0 6px 20px rgba(91,33,182,.3); margin-bottom:20px;
 }}
 .sidebar-stat {{
     display:flex; align-items:center; gap:10px;
     padding:10px 14px; background:{BG_APP};
-    border-radius:10px; margin:6px 0;
-    border:1px solid {BORDER};
+    border-radius:10px; margin:6px 0; border:1.5px solid {BORDER};
 }}
 .sidebar-stat-icon {{ font-size:18px; }}
-.sidebar-stat-text {{ font-size:13px; color:{TEXT_LIGHT}; }}
-.sidebar-stat-val {{ font-size:13px; font-weight:700; color:{TEXT_MAIN}; }}
+.sidebar-stat-text {{ font-size:12px; color:{TEXT_LIGHT} !important; }}
+.sidebar-stat-val {{ font-size:14px; font-weight:700; color:{TEXT_MAIN} !important; }}
 
 .main-header {{
     background:linear-gradient(135deg,{C_PRIMARY} 0%,#7C3AED 40%,{C_SECONDARY} 100%);
