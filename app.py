@@ -320,8 +320,8 @@ modelo,columnas,precision,importancias=entrenar_modelo(df_raw)
 with st.sidebar:
     # LOGO
     st.markdown(f"""<div class="sidebar-logo">
-      <div style="font-size:22px;font-weight:900;color:white;letter-spacing:2px;text-shadow:0 2px 8px rgba(0,0,0,.3)">🧵 CREDITEX</div>
-      <div style="font-size:11px;font-weight:600;color:rgba(255,255,255,.9);margin-top:4px">Sistema Inteligente · Producción</div>
+      <div style="font-size:22px;font-weight:900;color:white !important;letter-spacing:2px;text-shadow:0 2px 8px rgba(0,0,0,.3)">🧵 CREDITEX</div>
+      <div style="font-size:11px;font-weight:600;color:white !important;opacity:0.9;margin-top:4px">Sistema Inteligente · Producción</div>
     </div>""", unsafe_allow_html=True)
 
     # CONTROLES PRINCIPALES
