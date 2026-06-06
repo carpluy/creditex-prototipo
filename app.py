@@ -31,14 +31,15 @@ st.markdown(f"""
 section[data-testid="stSidebar"] {{
     background:{BG_CARD} !important;
     border-right:2px solid {BORDER} !important;
-    min-width:260px !important; max-width:260px !important;
+    min-width:220px !important; max-width:240px !important;
 }}
-section[data-testid="stSidebar"] * {{ color:{TEXT_MAIN} !important; font-size:14px !important; }}
-section[data-testid="stSidebar"] label {{ color:{TEXT_MAIN} !important; font-weight:600 !important; }}
-section[data-testid="stSidebar"] .stSelectbox label {{ color:{TEXT_MAIN} !important; }}
-section[data-testid="stSidebar"] p {{ color:{TEXT_MAIN} !important; }}
-section[data-testid="stSidebar"] h3 {{ color:{C_PRIMARY} !important; font-size:15px !important; font-weight:700 !important; }}
+section[data-testid="stSidebar"] * {{ color:{TEXT_MAIN} !important; font-size:13px !important; }}
+section[data-testid="stSidebar"] label {{ color:{TEXT_MAIN} !important; font-weight:600 !important; font-size:12px !important; }}
+section[data-testid="stSidebar"] .stSelectbox label {{ color:{TEXT_MAIN} !important; font-size:13px !important; }}
+section[data-testid="stSidebar"] p {{ color:{TEXT_MAIN} !important; font-size:13px !important; }}
+section[data-testid="stSidebar"] h3 {{ color:{C_PRIMARY} !important; font-size:14px !important; font-weight:700 !important; }}
 section[data-testid="stSidebar"] [data-testid="stSlider"] div {{ color:{TEXT_MAIN} !important; }}
+section[data-testid="stSidebar"] [data-testid="stSlider"] p {{ font-size:13px !important; font-weight:700 !important; color:{C_PRIMARY} !important; }}
 section[data-testid="stSidebar"] .stButton>button {{
     background:linear-gradient(135deg,{C_PRIMARY},{C_SECONDARY}) !important;
     color:white !important; border:none !important; border-radius:10px !important;
@@ -63,9 +64,9 @@ section[data-testid="stSidebar"] [data-testid="stSelectbox"]>div>div {{
 }}
 .sidebar-logo {{
     background:linear-gradient(135deg,{C_PRIMARY},{C_SECONDARY});
-    padding:20px; border-radius:18px; text-align:center;
-    font-size:24px; font-weight:900; color:white !important; letter-spacing:1px;
-    box-shadow:0 6px 20px rgba(91,33,182,.3); margin-bottom:20px;
+    padding:16px; border-radius:16px; text-align:center;
+    font-size:20px; font-weight:900; color:white !important; letter-spacing:1px;
+    box-shadow:0 6px 20px rgba(91,33,182,.3); margin-bottom:16px;
 }}
 .sidebar-stat {{
     display:flex; align-items:center; gap:10px;
@@ -206,6 +207,12 @@ section[data-testid="stSidebar"] [data-testid="stSelectbox"]>div>div {{
 [data-testid="stChatMessage"] {{ background:{BG_CARD} !important; border:1.5px solid {BORDER} !important; border-radius:14px !important; }}
 [data-testid="stChatInput"] textarea {{ background:{BG_CARD} !important; border:2px solid {C_PRIMARY} !important; border-radius:12px !important; font-size:15px !important; }}
 
+/* MAIN CONTENT */
+.main .block-container {{
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+    max-width: 100% !important;
+}}
 h1,h2,h3,h4 {{ color:{TEXT_MAIN} !important; }}
 .section-title {{ font-size:18px; font-weight:700; color:{TEXT_MAIN}; margin:16px 0 12px; }}
 .stMarkdown p {{ color:{TEXT_MAIN}; font-size:15px; }}
@@ -286,7 +293,7 @@ modelo,columnas,precision,importancias=entrenar_modelo(df_raw)
 # ── SIDEBAR ───────────────────────────────────────────────────────────────────
 with st.sidebar:
     # LOGO
-    st.markdown(f'<div class="sidebar-logo">🧵 CREDITEX<br><span style="font-size:13px;font-weight:500;opacity:.85">Sistema Inteligente de Producción</span></div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="sidebar-logo">🧵 CREDITEX<br><span style="font-size:11px;font-weight:500;opacity:.85">Sistema Inteligente · Producción</span></div>', unsafe_allow_html=True)
 
     # CONTROLES PRINCIPALES
     telar_sel = st.selectbox("🏭 Telar", opts["telares"][1:])
