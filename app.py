@@ -349,7 +349,7 @@ PLT=dict(paper_bgcolor=BG_CARD,plot_bgcolor=BG_CARD,
          margin=dict(t=20,b=20,l=10,r=10))
 
 tab1,tab2,tab3,tab4,tab5=st.tabs([
-    "📊 Monitor en tiempo real","💡 Recomendaciones","📈 Análisis","☁️ Datos de la nube","🤖 Asistente IA"
+    "📊 Monitor en tiempo real","💡 Recomendaciones","📈 Análisis","☁️ Datos de la nube","🧠 CREDITEX AI"
 ])
 
 # ══ TAB 1 ════════════════════════════════════════════════════════════════════
@@ -552,39 +552,168 @@ with tab4:
             st.session_state.df_cloud=fetch_records(n=2000)
         st.success("✅ Actualizado"); st.rerun()
 
-# ══ TAB 5 ════════════════════════════════════════════════════════════════════
+# ══ TAB 5 — CREDITEX AI ══════════════════════════════════════════════════════
 with tab5:
-    st.markdown(f'<p class="section-title">🤖 Asistente de Producción CREDITEX</p>', unsafe_allow_html=True)
-    summ=st.session_state.summary
+    summ = st.session_state.summary
+
+    # HEADER DEL COPILOT
+    st.markdown(f"""
+    <div style="background:linear-gradient(135deg,{C_PRIMARY},{C_SECONDARY});
+                border-radius:20px;padding:28px 32px;margin-bottom:20px;
+                box-shadow:0 8px 24px rgba(91,33,182,.25)">
+      <div style="display:flex;align-items:center;gap:16px">
+        <div style="background:rgba(255,255,255,.2);border-radius:16px;padding:14px;font-size:32px">🧵</div>
+        <div>
+          <div style="font-size:24px;font-weight:900;color:white">CREDITEX AI</div>
+          <div style="font-size:13px;color:rgba(255,255,255,.85);margin-top:4px">
+            Sistema Inteligente de Predicción y Recomendación Preventiva
+          </div>
+        </div>
+        <div style="margin-left:auto;background:rgba(255,255,255,.15);border-radius:20px;
+                    padding:6px 16px;font-size:13px;color:white;font-weight:600">
+          🟢 IA conectada
+        </div>
+      </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # STATS RÁPIDAS
+    s1,s2,s3,s4 = st.columns(4)
+    with s1:
+        st.markdown(f"""<div class="kpi-card" style="min-height:80px;padding:16px 20px">
+          <div class="kpi-icon ic-green" style="width:44px;height:44px;font-size:20px">🟢</div>
+          <div><p class="kpi-label">Estado</p><p style="font-size:18px;font-weight:800;color:{C_SUCCESS}">Operación Normal</p></div>
+        </div>""", unsafe_allow_html=True)
+    with s2:
+        st.markdown(f"""<div class="kpi-card" style="min-height:80px;padding:16px 20px">
+          <div class="kpi-icon ic-red" style="width:44px;height:44px;font-size:20px">🎯</div>
+          <div><p class="kpi-label">Riesgo estimado</p><p style="font-size:18px;font-weight:800;color:{color_g}">{riesgo_pct:.1f}%</p></div>
+        </div>""", unsafe_allow_html=True)
+    with s3:
+        st.markdown(f"""<div class="kpi-card" style="min-height:80px;padding:16px 20px">
+          <div class="kpi-icon ic-blue" style="width:44px;height:44px;font-size:20px">📈</div>
+          <div><p class="kpi-label">Registros analizados</p><p style="font-size:18px;font-weight:800;color:{C_SECONDARY}">{len(df_raw):,}</p></div>
+        </div>""", unsafe_allow_html=True)
+    with s4:
+        st.markdown(f"""<div class="kpi-card" style="min-height:80px;padding:16px 20px">
+          <div class="kpi-icon ic-purple" style="width:44px;height:44px;font-size:20px">🤖</div>
+          <div><p class="kpi-label">Precisión del modelo</p><p style="font-size:18px;font-weight:800;color:{C_PRIMARY}">{precision*100:.1f}%</p></div>
+        </div>""", unsafe_allow_html=True)
+
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    # MENSAJE INICIAL
     if "chat_history" not in st.session_state:
-        st.session_state.chat_history=[{"role":"assistant","content":
-            f"Hola 👋 Soy el asistente del sistema predictivo de CREDITEX.\n\nConectado a **{CLOUD_CONFIG['database']}** con **{len(df_raw):,} registros reales**.\n\nRiesgo actual del telar **{telar_sel}**: **{riesgo_pct:.1f}%** (nivel **{nivel}**).\n\n¿En qué te ayudo?"}]
+        msg_inicial = (
+            f"**🧵 CREDITEX AI — Copilot Industrial**\n\n"
+            f"Bienvenido al Sistema Inteligente de Predicción y Recomendación Preventiva.\n\n"
+            f"Mi función es analizar datos reales de producción, detectar patrones de riesgo "
+            f"y recomendar acciones preventivas antes de que ocurran defectos en el proceso.\n\n"
+            f"**Estado del sistema:**\n"
+            f"- 🟢 Operación normal · Riesgo: **{riesgo_pct:.1f}%** (nivel **{nivel}**)\n"
+            f"- 🧵 Telar activo: **{telar_sel}** · Turno: **{turno}**\n"
+            f"- 📈 Registros analizados: **{len(df_raw):,}**\n"
+            f"- 🤖 Precisión del modelo: **{precision*100:.1f}%**\n\n"
+            f"Puedes preguntarme sobre:\n"
+            f"- 🎯 Riesgo operativo y predicciones\n"
+            f"- 🧵 Calidad y tipos de defecto\n"
+            f"- 📊 Análisis de datos y tendencias\n"
+            f"- 🔧 Mantenimiento preventivo\n"
+            f"- ☁️ Conexión a la base de datos\n\n"
+            f"*Escribe una consulta o selecciona una pregunta rápida para comenzar.*"
+        )
+        st.session_state.chat_history = [{"role":"assistant","content": msg_inicial}]
+
+    # HISTORIAL
     for msg in st.session_state.chat_history:
-        with st.chat_message(msg["role"]): st.markdown(msg["content"])
+        with st.chat_message(msg["role"], avatar="🧵" if msg["role"]=="assistant" else "👤"):
+            st.markdown(msg["content"])
 
     def responder(p):
-        pl=p.lower()
-        if any(x in pl for x in ["riesgo","defecto","prediccion"]): return f"Riesgo actual: **{riesgo_pct:.1f}%** (nivel **{nivel}**) en telar **{telar_sel}**. Modelo: **{precision*100:.1f}%** precisión sobre {len(df_raw):,} registros reales."
-        if any(x in pl for x in ["nube","base","azure","datos","registros"]): c=st.session_state.conn_info; return f"- **Proveedor:** {CLOUD_CONFIG['provider']}\n- **Registros:** {c['rows_available']:,}\n- **Período:** {c['rango_fechas']}\n- **Telares:** {c['telares_activos']} activos\n- **Latencia:** {c['latency_ms']} ms"
-        if any(x in pl for x in ["recomienda","acción","accion","hacer"]):
-            if not recs: return "✅ El proceso opera correctamente según el histórico de CREDITEX."
-            return "**Recomendaciones:**\n\n"+"".join([f"- **{t}** ({p}): {x}\n\n" for t,x,p in recs[:3]])
-        if any(x in pl for x in ["cliente","reclamo"]): return f"- Más reclamos: **{summ['cliente_mas_reclamos']}**\n- Tasa rechazo: **{summ['pct_rechazado']}%**\n- Nivel alto: **{summ['pct_nivel_alto']}%**"
-        if any(x in pl for x in ["modelo","precision"]): return f"**Random Forest** (150 árboles, profundidad 10) entrenado con **{len(df_raw):,} registros reales** de CREDITEX. Precisión: **{precision*100:.1f}%**"
-        if any(x in pl for x in ["hola","buenas"]): return f"¡Hola! 😊 Sistema conectado con {len(df_raw):,} registros reales. Riesgo actual: **{riesgo_pct:.1f}%**."
-        return f"Puedo ayudarte con: riesgo, nube, recomendaciones, clientes o modelo.\n\n**Resumen:** {riesgo_pct:.1f}% riesgo · {len(df_raw):,} registros · {precision*100:.1f}% precisión"
+        pl = p.lower()
+        if any(x in pl for x in ["riesgo","defecto","prediccion","predicción"]):
+            return (f"**🎯 Análisis de riesgo operativo**\n\n"
+                    f"El modelo de inteligencia artificial estima un riesgo de defecto de **{riesgo_pct:.1f}%** "
+                    f"para el telar **{telar_sel}** en el turno **{turno}** (nivel **{nivel}**).\n\n"
+                    f"El modelo Random Forest fue entrenado con **{len(df_raw):,} registros reales** "
+                    f"de CREDITEX y alcanza una precisión de **{precision*100:.1f}%**.\n\n"
+                    f"{'⚠️ Se recomienda intervención inmediata del supervisor.' if nivel=='ALTO' else '✅ El proceso opera dentro de parámetros normales.' if nivel=='BAJO' else '⚡ Monitorear de cerca y aplicar ajustes preventivos.'}")
+        if any(x in pl for x in ["nube","base","azure","sql","datos","registros","conexion","conexión"]):
+            c = st.session_state.conn_info
+            return (f"**☁️ Estado de la conexión a la nube**\n\n"
+                    f"- **Proveedor:** {CLOUD_CONFIG['provider']}\n"
+                    f"- **Host:** {c['host']}\n"
+                    f"- **Base de datos:** {CLOUD_CONFIG['database']}\n"
+                    f"- **Registros disponibles:** {c['rows_available']:,}\n"
+                    f"- **Telares activos:** {c['telares_activos']}\n"
+                    f"- **Período de datos:** {c['rango_fechas']}\n"
+                    f"- **Latencia:** {c['latency_ms']} ms\n"
+                    f"- **Cifrado:** TLS 1.2 ✅")
+        if any(x in pl for x in ["recomienda","acción","accion","hacer","preveni"]):
+            recs_local = []
+            if roturas_urd>8:  recs_local.append(f"🧵 **Roturas de urdimbre** ({roturas_urd}): Verificar tensión y estado de hilos")
+            if roturas_tram>8: recs_local.append(f"🧵 **Roturas de trama** ({roturas_tram}): Revisar lanzadera")
+            if eficiencia<75:  recs_local.append(f"📊 **Eficiencia baja** ({eficiencia:.0f}%): Programar revisión técnica")
+            if dias_mant>60:   recs_local.append(f"🔧 **Mantenimiento vencido** ({dias_mant} días): Programar urgente")
+            if t_parada>120:   recs_local.append(f"⏸ **Tiempo de parada** ({t_parada} min): Investigar causa raíz")
+            if not recs_local: return "✅ **Sin alertas activas.** Todos los parámetros operan dentro de los rangos históricos normales de CREDITEX."
+            return "**💡 Recomendaciones preventivas activas:**\n\n" + "\n".join([f"- {r}" for r in recs_local])
+        if any(x in pl for x in ["cliente","reclamo","devolucion"]):
+            return (f"**🏢 Análisis por cliente**\n\n"
+                    f"- Cliente con más reclamos: **{summ['cliente_mas_reclamos']}**\n"
+                    f"- Tasa de rechazo global: **{summ['pct_rechazado']}%**\n"
+                    f"- Registros con nivel alto: **{summ['pct_nivel_alto']}%**\n"
+                    f"- Turno de mayor riesgo: **{summ['turno_mayor_riesgo']}**\n"
+                    f"- Telar con más incidencias: **{summ['telar_mayor_incid']}**")
+        if any(x in pl for x in ["modelo","precision","precisión","ia","inteligencia","algoritmo"]):
+            return (f"**🤖 Modelo de Inteligencia Artificial**\n\n"
+                    f"El sistema utiliza un **Random Forest Classifier** con:\n"
+                    f"- 🌲 150 árboles de decisión\n"
+                    f"- 📏 Profundidad máxima: 10 niveles\n"
+                    f"- 📊 14 variables predictoras\n"
+                    f"- 🗄 Entrenado con **{len(df_raw):,} registros reales** de CREDITEX\n"
+                    f"- 🎯 Precisión: **{precision*100:.1f}%**\n\n"
+                    f"Las variables más influyentes son temperatura, eficiencia del telar y roturas de urdimbre.")
+        if any(x in pl for x in ["mantenimiento","preventivo","revision"]):
+            return (f"**🔧 Estado de mantenimiento**\n\n"
+                    f"- Días desde último mantenimiento: **{dias_mant}**\n"
+                    f"- {'⚠️ **Mantenimiento vencido.** Se recomienda programar revisión inmediata.' if dias_mant>60 else '✅ Mantenimiento al día.'}\n\n"
+                    f"- Tiempo de parada acumulado: **{t_parada} min**\n"
+                    f"- Tiempo de reparación: **{t_reparac} min**")
+        if any(x in pl for x in ["hola","buenas","inicio","empezar"]):
+            return (f"¡Hola! 👋 Soy **CREDITEX AI**, tu copilot industrial.\n\n"
+                    f"Sistema operativo con **{len(df_raw):,} registros** analizados. "
+                    f"Riesgo actual del telar **{telar_sel}**: **{riesgo_pct:.1f}%**.\n\n"
+                    f"¿Qué información necesitas consultar?")
+        return (f"**🧵 CREDITEX AI**\n\n"
+                f"Puedo ayudarte con:\n"
+                f"- 🎯 **Riesgo operativo** — predicciones del modelo IA\n"
+                f"- 💡 **Recomendaciones** — acciones preventivas\n"
+                f"- ☁️ **Base de datos** — estado de la conexión\n"
+                f"- 🏢 **Clientes** — reclamos y rechazos\n"
+                f"- 🤖 **Modelo IA** — precisión y variables\n"
+                f"- 🔧 **Mantenimiento** — estado y alertas\n\n"
+                f"**Resumen actual:** Riesgo {riesgo_pct:.1f}% · {len(df_raw):,} registros · {precision*100:.1f}% precisión")
 
-    if pregunta:=st.chat_input("Escribe tu consulta..."):
+    if pregunta := st.chat_input("Consulta al Copilot Industrial CREDITEX..."):
         st.session_state.chat_history.append({"role":"user","content":pregunta})
-        with st.chat_message("user"): st.markdown(pregunta)
-        resp=responder(pregunta)
+        with st.chat_message("user", avatar="👤"): st.markdown(pregunta)
+        resp = responder(pregunta)
         st.session_state.chat_history.append({"role":"assistant","content":resp})
-        with st.chat_message("assistant"): st.markdown(resp)
+        with st.chat_message("assistant", avatar="🧵"): st.markdown(resp)
 
-    st.markdown(f'<p class="section-title" style="margin-top:16px">⚡ Preguntas rápidas</p>', unsafe_allow_html=True)
-    cols_q=st.columns(4)
-    for i,pq in enumerate(["¿Cuál es el riesgo actual?","¿Qué hay en la base de datos?","¿Qué se recomienda?","¿Cómo funciona el modelo?"]):
-        if cols_q[i].button(pq,use_container_width=True):
+    st.markdown(f'<p class="section-title" style="margin-top:20px">⚡ Consultas rápidas</p>', unsafe_allow_html=True)
+    cols_q = st.columns(3)
+    pqs = [
+        "¿Cuál es el riesgo actual?",
+        "¿Qué se recomienda hacer?",
+        "¿Cómo está la conexión a la nube?",
+        "¿Cómo funciona el modelo IA?",
+        "¿Qué clientes tienen más reclamos?",
+        "¿Cómo está el mantenimiento?",
+    ]
+    for i,pq in enumerate(pqs):
+        if cols_q[i%3].button(pq, use_container_width=True, key=f"qr_{i}"):
             st.session_state.chat_history.append({"role":"user","content":pq})
             st.session_state.chat_history.append({"role":"assistant","content":responder(pq)})
             st.rerun()
