@@ -21,9 +21,6 @@ st.set_page_config(
     layout="wide"
 )
 
-st.image("logo_creditex.png", width=300)
-
-st.title("Sistema Inteligente de Predicción y Recomendación Preventiva")
 
 C_PRIMARY   = "#5B21B6"
 C_SECONDARY = "#2563EB"
