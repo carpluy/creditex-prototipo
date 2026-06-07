@@ -13,13 +13,17 @@ from cloud_data import (
 )
 
 from pathlib import Path
-_logo_path = Path(__file__).parent / "logo_creditex.png"
-logo = Image.open(_logo_path) if _logo_path.exists() else None
+logo = Image.open("logo_creditex.png")
+
 st.set_page_config(
     page_title="Sistema Inteligente - CREDITEX",
-    page_icon=logo if logo else "🏭",
+    page_icon=logo,
     layout="wide"
 )
+
+st.image("logo_creditex.png", width=300)
+
+st.title("Sistema Inteligente de Predicción y Recomendación Preventiva")
 
 C_PRIMARY   = "#5B21B6"
 C_SECONDARY = "#2563EB"
