@@ -22,16 +22,44 @@ st.set_page_config(
 )
 
 
-C_PRIMARY   = "#5B21B6"
-C_SECONDARY = "#2563EB"
-C_SUCCESS   = "#059669"
-C_WARNING   = "#D97706"
-C_DANGER    = "#DC2626"
-BG_APP      = "#F8FAFC"
-BG_CARD     = "#FFFFFF"
-TEXT_MAIN   = "#1E1B4B"
-TEXT_LIGHT  = "#6B7280"
-BORDER      = "#E0E7FF"
+C_PRIMARY      = "#5B21B6"
+C_SECONDARY    = "#2563EB"
+C_SUCCESS      = "#059669"
+C_WARNING      = "#D97706"
+C_DANGER       = "#DC2626"
+C_INFO         = "#0891B2"  # Celeste información
+C_BLUE_LIGHT   = "#60A5FA"  # Azul claro
+C_GREEN_LIGHT  = "#34D399"  # Verde claro
+C_ORANGE_LIGHT = "#FBBF24"  # Ámbar claro
+C_PINK         = "#EC4899"  # Rosa moderno
+C_TEAL         = "#14B8A6"  # Verde azulado
+C_INDIGO       = "#4F46E5"  # Índigo
+C_CYAN         = "#06B6D4"  # Cian
+C_GOLD         = "#F59E0B"  # Dorado
+C_BROWN        = "#92400E"  # Marrón
+BG_APP         = "#F8FAFC"
+BG_CARD        = "#FFFFFF"
+BG_SIDEBAR     = "#EEF2FF"  # Menú lateral
+BG_HOVER       = "#F1F5F9"  # Hover
+BG_SECTION     = "#F8FAFC"  # Secciones
+TEXT_MAIN      = "#1E1B4B"
+TEXT_SECONDARY = "#374151"  # Texto secundario
+TEXT_LIGHT     = "#6B7280"
+TEXT_WHITE     = "#FFFFFF"  # Texto blanco
+BORDER         = "#E0E7FF"
+BORDER_LIGHT   = "#E5E7EB"  # Borde suave
+BORDER_DARK    = "#CBD5E1"  # Borde oscuro
+# =========================
+# GRÁFICOS
+# =========================
+CHART_1        = "#5B21B6"
+CHART_2        = "#2563EB"
+CHART_3        = "#059669"
+CHART_4        = "#D97706"
+CHART_5        = "#EC4899"
+CHART_6        = "#14B8A6"
+CHART_7        = "#4F46E5"
+CHART_8        = "#06B6D4"
 
 st.markdown(f"""
 <style>
