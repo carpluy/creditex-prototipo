@@ -12,10 +12,12 @@ from cloud_data import (
     fetch_latest_reading, get_summary_stats, get_filter_options
 )
 
-logo = Image.open("logo_creditex.png")
+from pathlib import Path
+_logo_path = Path(__file__).parent / "logo_creditex.png"
+logo = Image.open(_logo_path) if _logo_path.exists() else None
 st.set_page_config(
     page_title="Sistema Inteligente - CREDITEX",
-    page_icon=logo,
+    page_icon=logo if logo else "🏭",
     layout="wide"
 )
 
