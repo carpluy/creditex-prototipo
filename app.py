@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+from PIL import Image
 import plotly.express as px
 import plotly.graph_objects as go
 from sklearn.ensemble import RandomForestClassifier
@@ -11,7 +12,13 @@ from cloud_data import (
     fetch_latest_reading, get_summary_stats, get_filter_options
 )
 
-st.set_page_config(page_title="Sistema Inteligente - CREDITEX", page_icon="🏭", layout="wide")
+logo = Image.open("logo_creditex.png")
+
+st.set_page_config(
+    page_title="Sistema Inteligente - CREDITEX",
+    page_icon=logo,
+    layout="wide"
+)
 
 C_PRIMARY   = "#5B21B6"
 C_SECONDARY = "#2563EB"
